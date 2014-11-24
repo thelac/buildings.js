@@ -1,0 +1,17 @@
+<html>
+<head>
+    <link rel='stylesheet' type='text/css' href='css/style.css'>
+    <script src='js/utils/hasWebGL.js'></script>
+    <script>
+        if(hasWebGL()) window.location.replace("./"); //redirect back if user come back with this link but using webgl browser
+    </script>
+</head>
+
+<body>
+	<div class ="fallback"><p class="instructions">
+        To view this space in 3D, please use a browser that supports <a href="http://get.webgl.org" target="_blank">WebGL</a>.
+        </p>
+    </div>
+    <h2 class="attribution">Powered by <span>Floored</span></h2>
+</body>
+</html>

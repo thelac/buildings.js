@@ -1,0 +1,71 @@
+<html ng-app='app'>
+  <head>
+    <title>Terminal Stores Building | Floored</title>
+    <link href="http://labs.floored.com/fallback/assets/img/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link rel='stylesheet' type='text/css' href='css/style.css'>
+
+    <script src='js/utils/hasWebGL.js'></script>
+    <script>
+        if(!hasWebGL()) window.location.replace("./noWebGL.html");
+    </script>
+    <!-- Configuration -->
+    <script src='js/config.js'></script>
+
+    <!-- Libraries -->
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.js'></script>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/three.js/r68/three.js'></script>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/radio/0.2.0/radio.min.js'></script>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/nprogress/0.1.3/nprogress.min.js'></script>
+     <!-- Loaders -->
+    <script src='js/lib/MTLLoader.js'></script>
+    <script src='js/lib/OBJLoader.js'></script>
+    <script src='js/lib/UTF8Loader.js'></script>
+    <script src='js/lib/ImageLoader.js'></script>
+    <script src='js/lib/OrbitControls.js'></script>
+
+    <!-- Utilities -->
+    <script src='js/utils/fileStats.js'></script>
+    <script src='js/utils/saveAs.js'></script>
+    <script src='js/utils/uriToBlob.js'></script>
+    <script src='js/utils/format.js'></script>
+    <script src='js/utils/tabletop.js'></script>
+    <script src='js/utils/html2canvas.js'></script>
+
+    <!-- Angular components -->
+    <script src='js/ng/app.js'></script>
+    <script src='js/ng/controllers.js'></script>
+    <script src='js/ng/services.js'></script>
+    <script src='js/ng/directives.js'></script>
+
+    <!-- Three -->
+    <script src='js/gl/scene.js'></script>
+  </head>
+  <body ng-controller='controller'>
+    <!-- <ng-include src=''partials/user-prompt.html''></ng-include> -->
+    <canvas id='main' ng-mousedown='onCanvasMouseDown($event)' ng-mouseup='onCanvasMouseUp($event)'></canvas>
+    <screenshot></screenshot>
+    <div id = "infoContainer">
+        <div class ='panel'>
+            <ul class="groups">
+                <li ng-repeat='group in groups' ><span ng-click='sign=showSign(showCard=!showCard)' > {{sign + group.full_name}}</span>
+                    <ul ng-if="showCard" class="cards"> 
+                        <li ng-repeat='card in group.cards'class = "card">
+                            <input type="checkbox" ng-click='onCardClick(card, false)' ng-model="card.selected"><span ng-click='onCardClick(card, true)'>{{ card.name }}</span>
+                        </li>
+                    </ul>
+                </li>
+                <li><span ng-click='clearSelections()'>Clear Selections</span></li>
+            </ul>
+        </div>
+        <unitInfo></unitInfo>
+    </div>
+    <loading class="nprogress-custom-parent">
+        <p class="instructions">
+            Click and drag to look. Scroll to zoom. <br />To view this space in 3D, please use a browser that supports <a href="http://get.webgl.org" target="_blank">WebGL</a>.
+        </p>
+    </loading>
+    <h2 class="attribution">Powered by <span>Floored</span></h2>
+  </body>
+
+</html>
